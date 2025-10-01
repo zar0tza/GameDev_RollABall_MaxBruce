@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
@@ -39,10 +40,9 @@ public class PlayerController : MonoBehaviour
 
        if (count >= 12)
        {
-           winTextObject.SetActive(true);
-           returnMenuObject.SetActive(true);
            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
            Destroy(GameObject.FindGameObjectWithTag("EnemyLight"));
+           SceneManager.LoadScene("WinMenu");
            
        }
     }
@@ -69,13 +69,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            
-            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
-            Destroy(GameObject.FindGameObjectWithTag("EnemyLight"));
-            Destroy(GameObject.FindGameObjectWithTag("player"));
-            winTextObject.SetActive(true);
-            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
-            
+            SceneManager.LoadScene("LoseMenu");
         }
     }
 }
